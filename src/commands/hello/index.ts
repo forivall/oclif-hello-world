@@ -11,6 +11,18 @@ hello friend from oclif! (./src/commands/hello/index.ts)
 
   static flags = {
     from: Flags.string({char: 'f', description: 'Who is saying hello', required: true}),
+    ahoy: Flags.boolean({
+      async parse(input, context) {
+        if (context.argv.includes('pirates')) {
+          context.logToStderr('Pirates involved.')
+          context.exit(1)
+        }
+
+        context.log('Ahoy!')
+
+        return input
+      },
+    }),
   }
 
   static args = {
